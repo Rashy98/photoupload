@@ -17,12 +17,10 @@ class Login extends Component{
         axios.get('/login').then(response => {
             console.log(response.data)
 
-            // axios.get('/auth/google').then(res => {
-            //     console.log("Loginnnnnnnnnn")
-            // })
-            // this.props.history.push({
-            //     pathname:response.data.path
-            // })
+            window.open(' http://localhost:8000/auth/google',"_self");
+            axios.get('/auth/google').then(response => {
+                console.log(response)
+            })
 
 
         })

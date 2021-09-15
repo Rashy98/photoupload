@@ -16,14 +16,16 @@ class MainPage extends Component {
 
 
     componentDidMount() {
-        this.UploadToFBButton()
+        // this.UploadToFBButton()
     }
 
     UploadToFBButton (){
 
-        axios.get("/ha").then(response => {
-            console.log(response)
-        })
+        window.open(' http://localhost:8000/auth/google',"_self");
+        // axios.get('/auth/google').then(response => {
+        //     console.log(response.data)
+        // }
+        // );
     }
     render() {
         return (
