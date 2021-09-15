@@ -28,10 +28,14 @@ const session = require('express-session');
 const sessionFileStore = require('session-file-store');
 // const uuid = require('uuid');
 const winston = require('winston');
+const cors = require('cors');
+
+
 
 const app = express();
 const fileStore = sessionFileStore(session);
 const server = http.Server(app);
+app.use(cors());
 
 // Use the EJS template engine
 app.set('view engine', 'ejs');
@@ -81,6 +85,7 @@ storage.init();
 // Set up OAuth 2.0 authentication through the passport.js library.
 const passport = require('passport');
 const auth = require('./auth');
+const GoogleStrategy = require('passport-google-oauth20').Strategy
 auth(passport);
 
 // Set up a session middleware to handle user sessions.
@@ -151,6 +156,18 @@ app.use(sessionMiddleware);
 app.use(passport.initialize());
 app.use(passport.session());
 
+
+passport.use(new GoogleStrategy({
+        clientID:config.oAuthClientID,
+        clientSecret:config.oAuthclientSecret,
+        callbackURL: '/auth/google/callback',
+    },(accessToken,refreshToken, profile,done)=>{
+        console.log(accessToken);
+        console.log(refreshToken);
+        console.log(profile);
+    }
+));
+
 // Middleware that adds the user of this session as a local variable,
 // so it can be displayed on all pages when logged in.
 app.use((req, res, next) => {
@@ -181,13 +198,14 @@ app.use(function (req, res, next) {
     next();
 });
 
+
 // GET request to the root.
 // Display the login screen if the user is not logged in yet, otherwise the
 // photo frame.
 app.get('/login', (req, res) => {
     if (!req.user || !req.isAuthenticated()) {
         // Not logged in yet.
-        res.status(200).json({path:'/auth/google'});
+        res.status(200).json({path:'/main'});
     } else {
         res.status(200).json({path:'/pages'});
         // res.render('pages/frame');
@@ -202,15 +220,13 @@ app.get('/logout', (req, res) => {
     res.redirect('/');
 });
 
-// Star the OAuth login process for Google.
-app.get('/authen/google', passport.authenticate('google', {
+// Start the OAuth login process for Google.
+app.get('/auth/google', passport.authenticate('google', {
     scope: config.scopes,
     failureFlash: true,  // Display errors to the user.
     session: true,
 }
-)
-
-);
+));
 
 // Callback receiver for the OAuth process after log in.
 app.get(
@@ -220,7 +236,9 @@ app.get(
     (req, res) => {
         // User has logged in.
         logger.info('User has logged in.');
-        res.redirect('/');
+        console.log('logged in')
+        res.redirect('/login');
+        res.status(200).json({logged:'yes'});
     });
 
 // Loads the search page if the user is authenticated.
