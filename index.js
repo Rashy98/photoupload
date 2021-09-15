@@ -198,48 +198,53 @@ app.use(function (req, res, next) {
     next();
 });
 
+const fb = require('./routes/fb.route')
+const google = require('./routes/google.route')
 
-// GET request to the root.
-// Display the login screen if the user is not logged in yet, otherwise the
-// photo frame.
-app.get('/login', (req, res) => {
-    if (!req.user || !req.isAuthenticated()) {
-        // Not logged in yet.
-        res.status(200).json({path:'/main'});
-    } else {
-        res.status(200).json({path:'/pages'});
-        // res.render('pages/frame');
-    }
-});
+app.use('/fb', fb)
+app.use('/google', google)
 
-// GET request to log out the user.
-// Destroy the current session and redirect back to the log in screen.
-app.get('/logout', (req, res) => {
-    req.logout();
-    req.session.destroy();
-    res.redirect('/');
-});
-
-// Start the OAuth login process for Google.
-app.get('/auth/google', passport.authenticate('google', {
-    scope: config.scopes,
-    failureFlash: true,  // Display errors to the user.
-    session: true,
-}
-));
-
-// Callback receiver for the OAuth process after log in.
-app.get(
-    '/auth/google/callback',
-    passport.authenticate(
-        'google', {failureRedirect: '/', failureFlash: true, session: true}),
-    (req, res) => {
-        // User has logged in.
-        logger.info('User has logged in.');
-        console.log('logged in')
-        res.redirect('/login');
-        res.status(200).json({logged:'yes'});
-    });
+// // GET request to the root.
+// // Display the login screen if the user is not logged in yet, otherwise the
+// // photo frame.
+// app.get('/login', (req, res) => {
+//     if (!req.user || !req.isAuthenticated()) {
+//         // Not logged in yet.
+//         res.status(200).json({path:'/main'});
+//     } else {
+//         res.status(200).json({path:'/pages'});
+//         // res.render('pages/frame');
+//     }
+// });
+//
+// // GET request to log out the user.
+// // Destroy the current session and redirect back to the log in screen.
+// app.get('/logout', (req, res) => {
+//     req.logout();
+//     req.session.destroy();
+//     res.redirect('/');
+// });
+//
+// // Start the OAuth login process for Google.
+// app.get('/auth/google', passport.authenticate('google', {
+//     scope: config.scopes,
+//     failureFlash: true,  // Display errors to the user.
+//     session: true,
+// }
+// ));
+//
+// // Callback receiver for the OAuth process after log in.
+// app.get(
+//     '/auth/google/callback',
+//     passport.authenticate(
+//         'google', {failureRedirect: '/', failureFlash: true, session: true}),
+//     (req, res) => {
+//         // User has logged in.
+//         logger.info('User has logged in.');
+//         console.log('logged in')
+//         res.redirect('/login');
+//         res.status(200).json({logged:'yes'});
+//     });
 
 // Loads the search page if the user is authenticated.
 // This page includes the search form.
