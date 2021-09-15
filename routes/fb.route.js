@@ -8,18 +8,13 @@ const app = express();
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: true}))
 
-const access_token = 'EAAFo30ZAvORwBAOvAcLUoqJGnPCVubkCZCbP0ttZA6aGIZAttk7BEG2fhYq2C3htNOwpt0UoyZCb81b7zcNUrCQ6Ach6OE3LGzi5YZA9B2fZAM536eZCEvqY71lgORbj72JYCByo0DxmOqdFhMgMd4lA5SZBKTMW1NyipiMohWUNaKoNHtYImwCZBiPw7ivFniSKsbYPpTqwjtriubga9ErnmgLJItweZAoZA9m4erulmZCLJEX9SEZBX5HLkCXC3NvqvxkUvvnZALWPPFQLuyCUb53Uxua'
-const image_location = 'https://drive.google.com/file/d/13abucPULbvZ5lwNV88hkZDum2IfSHTPh/view?usp=sharing'
-
 /********************* ENV FILE EKATA DANNA **********************/
-const clientId = 396783145400604
-const appSecret = 'a95b69e021f05cd090893ef371b3c63e'
+
 const redirectURI = 'http://localhost:3000/'
 
 
 router.route('/connectLibrary').get((request, response) => {
 
-    // FB.setAccessToken(access_token)
     // FB.api('me', {fields : ['id', 'name', 'email', 'birthday', 'photos']},function (res){
     //     if(!res || res.error) {
     //         console.log(!res ? 'error occurred' : res.error);
