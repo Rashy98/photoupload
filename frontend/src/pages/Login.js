@@ -1,5 +1,6 @@
 import React,{Component} from 'react';
 import axios from "axios";
+import * as QueryString from 'query-string'
 
 
 class Login extends Component{
@@ -11,14 +12,24 @@ class Login extends Component{
         this.LoginAuth = this.LoginAuth.bind(this);
     }
 
+    componentDidMount() {
+        const urlParams = QueryString.parse(window.location.search)
+
+        if (urlParams.code !== undefined){
+            axios.post('http://localhost:8000/fb/getAccessToken', urlParams)
+        } else {
+            axios.get('http://localhost:8000/fb/getAccessCode')
+        }
+    }
+
 
     LoginAuth(){
 
-        axios.get('/login').then(response => {
+        axios.get('http://localhost:8000/google/login').then(response => {
             console.log(response.data)
 
-            window.open(' http://localhost:8000/auth/google',"_self");
-            axios.get('/auth/google').then(response => {
+            window.open('http://localhost:8000/google/auth/google',"_self");
+            axios.get('/google/auth/google').then(response => {
                 console.log(response)
             })
 
