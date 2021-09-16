@@ -9,32 +9,37 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: true}))
 
 /********************* ENV FILE EKATA DANNA **********************/
-//fb related
 
 const redirectURI = 'http://localhost:3000/'
 
 
-router.route('/connectLibrary').get((request, response) => {
+router.route('/connectLibrary').get(async (request, response) => {
 
-    // FB.api('me', {fields : ['id', 'name', 'email', 'birthday', 'photos']},function (res){
-    //     if(!res || res.error) {
-    //         console.log(!res ? 'error occurred' : res.error);
-    //         return response.status(400).json({success : false, error : res.error});
-    //     }
-    //     console.log(res.id);
-    //     console.log(res.name);
-    //     console.log(res.photos.data)
-    //     return response.status(200).json({success : true, id : res.id, name : res.name});
-    // })
+    let array_ids = []
+    let array_urls = []
 
-    FB.api('691910607610748', {fields : ['images']},function (res){
+    FB.api('me', {fields : ['id', 'name', 'email', 'birthday', 'photos']},async function (res){
         if(!res || res.error) {
             console.log(!res ? 'error occurred' : res.error);
             return response.status(400).json({success : false, error : res.error});
         }
 
-        console.log(res)
-        return response.status(200).json({success : true, response : res});
+        for (let i = 0; i < res.photos.data.length; i++){
+            array_ids.push(res.photos.data[i].id)
+
+            let res_url = await FB.api(res.photos.data[i].id, {fields : ['images']})
+
+            if (!res_url || res_url.error) {
+                console.log(!res_url ? 'error occurred' : res_url.error);
+                return response.status(400).json({success: false, error: res_url.error});
+            }
+
+            array_urls.push(res_url.images[1].source)
+        }
+
+        console.log(array_urls)
+
+        return response.status(200).json({success : true, id : res.id, name : res.name, ids : array_urls});
     })
 
 })
