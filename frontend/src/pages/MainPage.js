@@ -1,6 +1,7 @@
 
 import React,{Component} from 'react';
 import axios from 'axios';
+import { Link } from "react-router-dom";
 
 
 
@@ -21,7 +22,7 @@ class MainPage extends Component {
 
     UploadToFBButton (){
 
-        window.open(' http://localhost:8000/auth/google',"_self");
+        window.open(' http://localhost:8000/google/auth/google',"_self");
         // axios.get('/auth/google').then(response => {
         //     console.log(response.data)
         // }
@@ -30,7 +31,10 @@ class MainPage extends Component {
     render() {
         return (
             <div className="App">
-                <button onClick={this.UploadToFBButton}>Upload</button>
+                <h1>Download from FB and Upload to Google photos</h1>
+
+                <Link to=''>Download</Link>
+                <Link to='/login'>Upload</Link>
 
             </div>
         );

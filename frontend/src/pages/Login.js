@@ -28,10 +28,12 @@ class Login extends Component{
         axios.get('http://localhost:8000/google/login').then(response => {
             console.log(response.data)
 
-            window.open('http://localhost:8000/google/auth/google',"_self");
-            axios.get('/google/auth/google').then(response => {
-                console.log(response)
-            })
+            const windowdata = window.open('http://localhost:8000/google/auth/google',"_self");
+            console.log(windowdata);
+            // this.props.history.redirect(response.data.path);
+            // axios.get('http://localhost:8000/google/auth/google').then(response => {
+            //     console.log(response)
+            // })
 
 
         })

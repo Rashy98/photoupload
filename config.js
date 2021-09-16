@@ -16,11 +16,15 @@
 
 const config = {};
 
+// The OAuth client ID from the Google Developers console.
+
+
+// The OAuth client secret from the Google Developers console.
 
 
 // The callback to use for OAuth requests. This is the URL where the app is
 // running. For testing and running it locally, use 127.0.0.1.
-config.oAuthCallbackUrl = 'http://localhost:8000/auth/google/callback';
+config.oAuthCallbackUrl = 'http://localhost:8000/google/auth/google/callback';
 
 // The port where the app should listen for requests.
 config.port = 8000;
@@ -28,7 +32,9 @@ config.port = 8000;
 // The scopes to request. The app requires the photoslibrary.readonly and
 // plus.me scopes.
 config.scopes = [
-  'https://www.googleapis.com/auth/photoslibrary.readonly',
+  // 'https://www.googleapis.com/auth/photoslibrary.readonly',
+  // 'https://photoslibrary.googleapis.com/v1/uploads',
+  'https://www.googleapis.com/auth/photoslibrary',
   'profile',
 ];
 

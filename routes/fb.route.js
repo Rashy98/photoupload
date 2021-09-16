@@ -9,6 +9,9 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: true}))
 
 /********************* ENV FILE EKATA DANNA **********************/
+//fb related
+const clientId = 396783145400604
+const appSecret = 'a95b69e021f05cd090893ef371b3c63e'
 
 const redirectURI = 'http://localhost:3000/'
 
