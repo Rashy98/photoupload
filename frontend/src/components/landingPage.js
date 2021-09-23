@@ -1,6 +1,6 @@
 import React,{Component} from "react";
 import { Button, ButtonGroup } from 'reactstrap';
-import "../css/landing.css;
+import "../css/landing.css";
 const axios = require('axios')
 
 class landingPage extends Component {

@@ -19,11 +19,16 @@ class MainPage extends Component {
 
     componentDidMount() {
         const urlParams = QueryString.parse(window.location.search)
+        console.log(urlParams)
+
 
         if (urlParams.code !== undefined){
             axios.post('http://localhost:8000/fb/getAccessToken', urlParams)
         } else {
-            axios.get('http://localhost:8000/fb/getAccessCode')
+            axios.post('http://localhost:8000/fb/getAccessCode')
+                .then(response => {
+                    window.location.href = response.data.url
+                })
         }
     }
 

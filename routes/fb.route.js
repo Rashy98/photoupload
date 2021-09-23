@@ -41,7 +41,7 @@ router.route('/getPhotos').get(async (request, response) => {
 })
 
 /* Get access code from the facebook */
-router.route('/getAccessCode').get((request, response)=> {
+router.route('/getAccessCode').post((request, response)=> {
 
     const stringifiedParams = QueryString.stringify({
         client_id : process.env.CLIENT_ID,
@@ -54,7 +54,8 @@ router.route('/getAccessCode').get((request, response)=> {
 
     const fbURL = process.env.ACCESS_CODE_URL + stringifiedParams
 
-    return response.redirect(fbURL)
+    return response.status(200).json({url : fbURL})
+    // return response.redirect(fbURL)
 })
 
 /* Get access token from the facebook */
