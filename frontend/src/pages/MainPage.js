@@ -39,8 +39,8 @@ class MainPage extends Component {
         return (
             <div className="App">
                 <h1>Download from FB and Upload to Google photos</h1>
-                <img src='https://scontent.fcmb1-2.fna.fbcdn.net/v/t1.6435-9/p720x720/67281839_2078958799072051_4750904767692144640_n.jpg?_nc_cat=101&ccb=1-5&_nc_sid=dd9801&_nc_ohc=Aj7QWMZswu8AX-j20p5&_nc_ht=scontent.fcmb1-2.fna&edm=AMAeTUEEAAAA&oh=75
-7e003f0fe864b7fd34f8b7ddc3d407&oe=616AE5D6'/>
+{/*                <img src='https://scontent.fcmb1-2.fna.fbcdn.net/v/t1.6435-9/p720x720/67281839_2078958799072051_4750904767692144640_n.jpg?_nc_cat=101&ccb=1-5&_nc_sid=dd9801&_nc_ohc=Aj7QWMZswu8AX-j20p5&_nc_ht=scontent.fcmb1-2.fna&edm=AMAeTUEEAAAA&oh=75*/}
+{/*7e003f0fe864b7fd34f8b7ddc3d407&oe=616AE5D6'/>*/}
                 <Link to=''>Download</Link>
                 <Link to='/login'>Upload</Link>
 

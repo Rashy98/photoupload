@@ -4,13 +4,10 @@ const router = require('express').Router();
 const {FB} = require('fb')
 const QueryString = require('query-string')
 const app = express();
+const env = require('dotenv').config()
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: true}))
-
-/********************* ENV FILE EKATA DANNA **********************/
-
-const redirectURI = 'http://localhost:3000/'
 
 
 router.route('/connectLibrary').get(async (request, response) => {
@@ -47,8 +44,8 @@ router.route('/connectLibrary').get(async (request, response) => {
 router.route('/getAccessCode').get((request, response)=> {
 
     const stringifiedParams = QueryString.stringify({
-        client_id : clientId,
-        redirect_uri : redirectURI,
+        client_id : process.env.CLIENT_ID,
+        redirect_uri : process.env.REDIRECT_URI,
         scope : 'email, user_photos',
         response_type : 'code',
         auth_type : 'rerequest',
@@ -67,10 +64,10 @@ router.route('/getAccessToken').post((request, response) => {
 
     FB.api('oauth/access_token',
         {
-            client_id : clientId,
-            client_secret : appSecret,
+            client_id : process.env.CLIENT_ID,
+            client_secret : process.env.APP_SECRET,
             code : code,
-            redirect_uri : redirectURI,
+            redirect_uri : process.env.REDIRECT_URI,
         }, function (res){
             if(!res || res.error){
                 console.log((!res? 'error occurred ' : res.error))

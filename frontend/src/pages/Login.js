@@ -34,8 +34,6 @@ class Login extends Component{
             // axios.get('http://localhost:8000/google/auth/google').then(response => {
             //     console.log(response)
             // })
-
-
         })
     }
 
