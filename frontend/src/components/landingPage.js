@@ -1,6 +1,6 @@
 import React,{Component} from "react";
 import { Button, ButtonGroup } from 'reactstrap';
-import "../css/landing.css;
+import "../css/landing.css";
 const axios = require('axios')
 
 class landingPage extends Component {
@@ -10,8 +10,10 @@ class landingPage extends Component {
         this.handleClick = this.handleClick.bind(this);
     }
     handleClick() {
+        console.log("OIiiiiiiii")
 
-        this.props.history.push('/home');
+        // this.props.history.push('/home');
+        axios.get("http://localhost:8000/fb/getAccessCode")
     }
 
 
