@@ -1,0 +1,18 @@
+.landing{
+    overflow: hidden;
+    /*background-color: #0c2646;*/
+    background-image: url('../images/landingBack.jpg');
+    background-size: cover;
+    height: 100vh;
+}
+.custom-btn {
+    background: transparent;
+    color: white;
+    border: 2px solid white;
+    border-radius: 3px;
+    padding: 10px 20px;
+    text-transform: uppercase;
+    margin-left: 25%;
+    margin-top: 35%;
+    
+}
