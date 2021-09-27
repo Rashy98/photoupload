@@ -1,6 +1,5 @@
 import React,{Component} from "react";
 import { Button, ButtonGroup } from 'reactstrap';
-import * as QueryString from "query-string";
 import "../css/landing.css";
 const axios = require('axios')
 
