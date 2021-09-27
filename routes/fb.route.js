@@ -10,7 +10,9 @@ const constants = require('../common/constants')
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: true}))
 
-/* Get user photos from facebook */
+/**
+ * Get user photos from facebook
+ */
 router.route('/getPhotos').get(async (request, response) => {
 
     let array_urls = []
@@ -38,7 +40,9 @@ router.route('/getPhotos').get(async (request, response) => {
 
 })
 
-/* Get access code from the facebook */
+/**
+ * Get access code from the facebook
+ */
 router.route('/getAccessCode').post((request, response)=> {
 
     const stringifiedParams = QueryString.stringify({
@@ -55,7 +59,9 @@ router.route('/getAccessCode').post((request, response)=> {
     return response.status(200).json({url : fbURL})
 })
 
-/* Get access token from the facebook */
+/**
+ * Get access token from the facebook
+ */
 router.route('/getAccessToken').post((request, response) => {
 
     const code = request.body.code
