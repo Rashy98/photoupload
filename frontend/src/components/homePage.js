@@ -23,14 +23,19 @@ class homePage extends Component {
             <div className="">
                 <div className="homeback" style={{marginBottom:"2%", display: 'flex', justifyContent: 'flex-end' }} >
                     <img src={TopBar} style={{width:"100%", marginBottom:"%"}}/>
-                    <Button className="" variant="light" onClick={this.handleClick}>Log In </Button>
+                    {/*<Button className="" variant="light" onClick={this.handleClick}>Log In </Button>*/}
+                </div>
+
+                <div className="py-3">
+                    <div className='container'>
+                        <div className="row" >
+                            <Cards/>
+                        </div>
+                    </div>
+
                 </div>
 
 
-                <div>
-                    <Cards/>
-
-                </div>
             </div>
         )
     }
