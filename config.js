@@ -17,10 +17,10 @@
 const config = {};
 
 // The OAuth client ID from the Google Developers console.
-config.oAuthClientID = '254117626354-v2vukp9etsd79g6tfovq4u34lpejcfo5.apps.googleusercontent.com';
+
 
 // The OAuth client secret from the Google Developers console.
-config.oAuthclientSecret = 'YQLx2p0xr0CCnpukPW1MrCqR';
+
 
 // The callback to use for OAuth requests. This is the URL where the app is
 // running. For testing and running it locally, use 127.0.0.1.

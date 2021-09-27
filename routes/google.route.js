@@ -8,33 +8,13 @@ const auth = require('../auth');
 const GoogleStrategy = require('passport-google-oauth20').Strategy
 auth(passport);
 const config = require('../config');
-//
-// passport.serializeUser((user, done) => {
-//     done(null, user.googleId||user.id);
-// });
-//
-// passport.deserializeUser((googleId, done) => {
-//     database.findOne({googleId : googleId}, function (err, user) {
-//
-//         done(null, user);
-//     });
-// });
+const fs = require('fs');
+var request = require('request').defaults({ encoding: null });
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: true}))
 
-// GET request to the root.
-// Display the login screen if the user is not logged in yet, otherwise the
-// photo frame.
-// app.get('/login', (req, res) => {
-//     if (!req.user || !req.isAuthenticated()) {
-//         // Not logged in yet.
-//         res.status(200).json({path:'/main'});
-//     } else {
-//         res.status(200).json({path:'/pages'});
-//         // res.render('pages/frame');
-//     }
-// });
+let user = '';
 
 router.route('/login').get((req, res) => {
     console.log(res);
@@ -47,13 +27,6 @@ router.route('/login').get((req, res) => {
     }
 })
 
-// GET request to log out the user.
-// Destroy the current session and redirect back to the log in screen.
-// app.get('/logout', (req, res) => {
-//     req.logout();
-//     req.session.destroy();
-//     res.redirect('/');
-// });
 
 router.route('/logout').get((req, res) => {
     req.logout();
@@ -89,24 +62,93 @@ router.get('/auth/google/callback',
         {failureRedirect: '/', failureFlash: true, session: true}), (req, res) => {
         // User has logged in.
         // logger.info('User has logged in.');
+        user = req.user
         console.log('logged in')
         return res.redirect('http://localhost:3000/login');
         // res.status(200).json({logged: 'yes'});
     });
-//
-// router.route('/auth/google/callback',
-//     passport.authenticate(
-//     'google',
-//     {failureRedirect: '/', failureFlash: true, session: true})
-//     ).get((req,res) =>{
-//         console.log('logged in')
-//         console.log(res)
-//         res.redirect('http://localhost:3000/login');
-//         res.status(200).json({logged: 'yes'});
-// })
+
 router.post('/uploadImage',async (req,res)=>{
     // const userID = req.user.profile.id;
-    console.log(req);
+    console.log(user.token);
+    let image = ""
+
+    let filePath = './images.png'
+    console.log(typeof fs.readFileSync(filePath))
+
+    let urls = 'https://www.spectatornews.com/wp-content/uploads/2020/04/WEB_1DReunion_Submitted.jpg'
+
+
+    request.get(urls, function (err, res, bod) {
+        image = bod
+        // console.log(image.toString())
+
+        const header = {
+            'Authorization': `Bearer ${user.token}`,
+            'Content-Type': 'application/octet-stream',
+            'X-Goog-Upload-File-Name': 'WEB_1DReunion_Submitted-900x506.jpg',
+            'X-Goog-Upload-Content-Type': 'image/jpg',
+            'X-Goog-Upload-Protocol': 'raw'
+        }
+        // body = fs.readFileSync(filePath),
+        axios.post('https://photoslibrary.googleapis.com/v1/uploads',
+            // body = fs.readFileSync(filePath),
+            body = bod,
+            {
+                headers: header
+            }).then(resp => {
+            console.log(resp.data)
+            const header2 = {
+                'Authorization': `Bearer ${user.token}`,
+                'Content-type': 'application/json',
+
+            }
+            const data2 = {
+
+                'newMediaItems':
+                    [
+                        {
+                            "description": "test upload",
+                            "simpleMediaItem": {
+                                "uploadToken": resp.data
+                            }
+                        }
+                    ]
+
+
+            }
+            const dataCreate = {
+                'data': data2
+            }
+            const datanew = JSON.stringify(dataCreate)
+
+            axios({
+                method: 'post',
+                url: 'https://photoslibrary.googleapis.com/v1/mediaItems:batchCreate',
+                headers: header2,
+                data: JSON.stringify(data2)
+            }).then(resps => {
+                console.log(resps.data.newMediaItemResults)
+                // });
+            });
+
+            // axios.post('https://photoslibrary.googleapis.com/v1/uploads',data,{
+            //     headers:header
+            // } ).then(resp =>{
+            //         console.log(utf8.encode(resp.data));
+            //
+            //     axios.post('https://photoslibrary.googleapis.com/v1/mediaItems:batchCreate',dataCreate,{
+            //     headers:header2
+            // } ).then(respp =>{
+            //     console.log(respp.data)
+            //     })
+
+        })
+
+
+    });
+
+
 
 })
 
