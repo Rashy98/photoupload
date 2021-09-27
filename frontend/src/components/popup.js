@@ -1,12 +1,9 @@
 import React, {Component} from "react";
-import {Modal, Button, Row, Col, Form} from "react-bootstrap";
 
-class popup extends Component{
-
-    cons
+class popup extends Component {
 
     render() {
-        return(
+        return (
             <div>
                 <div>
                     <button>
@@ -29,4 +26,5 @@ class popup extends Component{
         )
     }
 }
+
 export default popup;
