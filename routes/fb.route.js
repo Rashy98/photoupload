@@ -20,7 +20,7 @@ router.route('/getPhotos').get(async (request, response) => {
             console.log(!res ? 'error occurred' : res.error);
             return response.status(400).json({success : false, error : res.error});
         }
-
+        console.log(res)
         for (let i = 0; i < res.photos.data.length; i++){
 
             let res_url = await FB.api(res.photos.data[i].id, {fields : [constants.IMAGES]})
