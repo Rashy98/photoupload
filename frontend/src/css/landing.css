@@ -1,6 +1,5 @@
 .landing{
     overflow: hidden;
-    /*background-color: #0c2646;*/
     background-image: url('../images/landingBack.jpg');
     background-size: cover;
     height: 100vh;
@@ -14,5 +13,5 @@
     text-transform: uppercase;
     margin-left: 25%;
     margin-top: 35%;
-    
+
 }

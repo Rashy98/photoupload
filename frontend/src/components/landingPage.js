@@ -44,7 +44,6 @@ class landingPage extends Component {
                 window.location.href = response.data.url
             })
 
-        // this.props.history.push('/home');
     }
 
 

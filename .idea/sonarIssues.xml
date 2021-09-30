@@ -28,6 +28,11 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/README.md">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/config.js">
           <value>
             <set />
@@ -54,6 +59,31 @@
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/frontend/src/App.js">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/frontend/src/components/cards.js">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/frontend/src/components/landingPage.js">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/frontend/src/components/model.js">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/frontend/src/css/landing.css">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/frontend/src/css/model.css">
           <value>
             <set />
           </value>
